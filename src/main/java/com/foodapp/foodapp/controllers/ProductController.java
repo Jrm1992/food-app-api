@@ -18,14 +18,14 @@ public class ProductController {
     private ProductRepository productRepository;
 
     @GetMapping
-    public ResponseEntity<?> getAllProducts() {
+    public ResponseEntity getAllProducts() {
         List<ProductResponseDTO> products = this.productRepository.findAll().stream().map(ProductResponseDTO::new).toList();
 
         return ResponseEntity.ok(products);
     }
 
     @PostMapping
-    public ResponseEntity<?> createProduct(@RequestBody ProductRequestDTO product) {
+    public ResponseEntity createProduct(@RequestBody ProductRequestDTO product) {
         Product newProduct = new Product(product);
 
         this.productRepository.save(newProduct);
