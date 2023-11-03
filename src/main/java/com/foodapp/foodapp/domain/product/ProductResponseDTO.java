@@ -5,6 +5,7 @@ public record ProductResponseDTO(
     String name,
     Integer price,
     String description
+
 ) {
     public ProductResponseDTO(Product product) {
         this(
