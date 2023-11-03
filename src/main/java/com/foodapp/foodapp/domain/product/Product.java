@@ -24,8 +24,8 @@ public class Product {
     private String description;
 
     public Product(ProductRequestDTO product) {
-        this.name = product.getName();
-        this.price = product.getPrice();
-        this.description = product.getDescription();
+        this.name = product.name();
+        this.price = product.price();
+        this.description = product.description();
     }
 }
