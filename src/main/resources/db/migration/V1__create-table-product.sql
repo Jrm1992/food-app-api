@@ -3,4 +3,4 @@ CREATE TABLE product(
     name TEXT NOT NULL,
     price INTEGER NOT NULL,
     description TEXT NOT NULL
-)
+);
