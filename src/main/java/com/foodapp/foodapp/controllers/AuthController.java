@@ -1,9 +1,11 @@
 package com.foodapp.foodapp.controllers;
 
 import com.foodapp.foodapp.domain.user.AuthDTO;
+import com.foodapp.foodapp.domain.user.LoginResponseDTO;
 import com.foodapp.foodapp.domain.user.RegisterDTO;
 import com.foodapp.foodapp.domain.user.User;
 import com.foodapp.foodapp.repositories.UserRepository;
+import com.foodapp.foodapp.services.TokenService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -24,12 +26,17 @@ public class AuthController {
     @Autowired
     private UserRepository repository;
 
+    @Autowired
+    private TokenService token;
+
     @PostMapping("/login")
     public ResponseEntity login(@RequestBody @Valid AuthDTO data) {
         var usernamePassword = new UsernamePasswordAuthenticationToken(data.login(), data.password());
         var auth = this.authenticationManager.authenticate(usernamePassword);
 
-        return ResponseEntity.ok().build();
+        var token = this.token.generateToken((User) auth.getPrincipal());
+
+        return ResponseEntity.ok(new LoginResponseDTO(token));
     }
 
     @PostMapping("/register")
