@@ -20,7 +20,7 @@ public class SecurityConfig {
 
     @Autowired
     private SecurityFilter securityFilter;
-    
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return http
