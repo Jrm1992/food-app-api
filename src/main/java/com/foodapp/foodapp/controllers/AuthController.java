@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/auth")
+@RequestMapping()
 public class AuthController {
     @Autowired
     private AuthenticationManager authenticationManager;
@@ -29,7 +29,7 @@ public class AuthController {
     @Autowired
     private TokenService token;
 
-    @PostMapping("/login")
+    @PostMapping("/signin")
     public ResponseEntity login(@RequestBody @Valid AuthDTO data) {
         var usernamePassword = new UsernamePasswordAuthenticationToken(data.login(), data.password());
         var auth = this.authenticationManager.authenticate(usernamePassword);
@@ -39,7 +39,7 @@ public class AuthController {
         return ResponseEntity.ok(new LoginResponseDTO(token));
     }
 
-    @PostMapping("/register")
+    @PostMapping("/signup")
     public ResponseEntity register(@RequestBody @Valid RegisterDTO data) {
         if (this.repository.findByLogin(data.login()) != null) {
             return ResponseEntity.badRequest().build();
