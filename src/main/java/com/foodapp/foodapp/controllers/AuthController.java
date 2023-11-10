@@ -28,7 +28,7 @@ public class AuthController {
 
     @Autowired
     private TokenService token;
-
+ 
     @PostMapping("/signin")
     public ResponseEntity login(@RequestBody @Valid AuthDTO data) {
         var usernamePassword = new UsernamePasswordAuthenticationToken(data.login(), data.password());
