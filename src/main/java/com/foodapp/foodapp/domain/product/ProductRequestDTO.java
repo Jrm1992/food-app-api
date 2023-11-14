@@ -11,7 +11,10 @@ public record ProductRequestDTO(
         Integer price,
 
         @NotNull
-        String description
+        String description,
+
+        @NotNull
+        ProductCategory category
 
 ) {
 }
